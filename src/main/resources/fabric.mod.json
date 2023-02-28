@@ -1,38 +1,35 @@
 {
   "schemaVersion": 1,
-  "id": "modid",
+  "id": "teacup",
   "version": "${version}",
 
-  "name": "Example Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "name": "Tea Cup",
+  "description": "A Library for serverside mods",
   "authors": [
-    "Me!"
+    "JustFoxx"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": "https://github.com/JustFoxx/Tea-Cup",
+    "sources": "https://github.com/JustFoxx/Tea-Cup"
   },
 
-  "license": "CC0-1.0",
-  "icon": "assets/modid/icon.png",
-
+  "license": "LGPL-3.0",
   "environment": "*",
   "entrypoints": {
+    "preLaunch": [
+      "io.github.justfoxx.teacup.PreMain"
+    ],
     "main": [
-      "net.fabricmc.example.ExampleMod"
+      "io.github.justfoxx.teacup.v1.Main"
     ]
   },
   "mixins": [
-    "modid.mixins.json"
+    "teacup.mixins.json"
   ],
 
   "depends": {
-    "fabricloader": ">=0.14.9",
-    "fabric-api": "*",
-    "minecraft": "~1.19",
+    "fabricloader": ">=0.14.14",
+    "minecraft": ">1.19.3",
     "java": ">=17"
-  },
-  "suggests": {
-    "another-mod": "*"
   }
 }
