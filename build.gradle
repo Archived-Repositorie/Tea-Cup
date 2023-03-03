@@ -19,10 +19,12 @@ dependencies {
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
-	implementation "com.github.LlamaLad7:MixinExtras:0.1.1"
-	annotationProcessor "com.github.LlamaLad7:MixinExtras:0.1.1"
-	include "com.github.LlamaLad7:MixinExtras:0.1.1"
-	annotationProcessor "com.github.LlamaLad7:MixinExtras:0.1.1"
+	String mixin_extras = "com.github.LlamaLad7:MixinExtras:0.1.1"
+
+	implementation(mixin_extras)
+	annotationProcessor(mixin_extras)
+	include(mixin_extras)
+	annotationProcessor(mixin_extras)
 }
 
 processResources {
