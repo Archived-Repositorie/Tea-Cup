@@ -1,45 +1,47 @@
 package io.github.justfoxx.teacup.v1.event;
 
 import com.google.gson.JsonObject;
+import io.github.justfoxx.teacup.v1.event.data.OnItemUseData;
 import io.github.justfoxx.teacup.v1.registry.MapRegistry;
-import io.github.justfoxx.teacup.v1.utils.JsonHelper;
+import io.github.justfoxx.teacup.v1.utils.Mod;
 import io.github.justfoxx.teacup.v1.utils.ThrowingConsumer;
 import io.github.justfoxx.teacup.v1.utils.tuples.Pair;
+import net.minecraft.util.ActionResult;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import java.nio.file.Files;
-import java.util.Map;
 import java.util.Optional;
-import java.util.Set;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
+/**
+ * A class that holds all the events
+ */
 public final class Events {
     static {
-        CONFIG_EVENT = DataEventKey.of(new MapRegistry<>(),
-                Events::configEvent
+        CONFIG = DataEventKey.of(new MapRegistry<>(),
+                EventFunctions::configEvent
+        );
+        ON_ITEM_USE = DataEventKey.of(new MapRegistry<>(),
+                EventFunctions::onItemUse
         );
     }
-
+    /**
+     * A config event that is called when the config is loaded
+     */
     public static final DataEventKey<
             ThrowingConsumer<JsonObject>,
             Pair<Mod, Optional<Object>>,
             Void
-            > CONFIG_EVENT;
+            > CONFIG;
 
-    private static void configEvent(Set<Map.Entry<ThrowingConsumer<JsonObject>, Pair<Mod, Optional<Object>>>> entries) throws Exception {
-        for (var entry : entries) {
-            var value = entry.getValue();
-            var configPath = value.getA().getConfigPath();
-            var defaultObject = value.getB();
-            var invoker = entry.getKey();
+    /**
+     * An event that is called when a player uses an item
+     */
+    public static final DataEventKey<
+            Function<OnItemUseData,ActionResult>,
+            Predicate<OnItemUseData>,
+            Pair<OnItemUseData, CallbackInfoReturnable<ActionResult>>
+            > ON_ITEM_USE;
 
-            JsonObject configObject;
-            if (Files.notExists(configPath)) {
-                Files.createFile(configPath);
-                configObject = JsonHelper.getDefaultJsonObject(defaultObject, configPath);
-            } else {
-                configObject = JsonHelper.readJsonObject(configPath);
-            }
-            invoker.accept(configObject);
-        }
-    }
     private Events() {}
 }

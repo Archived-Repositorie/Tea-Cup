@@ -15,5 +15,10 @@ public interface ThrowingConsumer<T> extends Consumer<T> {
         }
     }
 
+    /**
+     * Shouldn't be used directly, use accept instead
+     * @param elem Element
+     * @throws Exception Any exception
+     */
     void acceptThrows(T elem) throws Exception;
 }

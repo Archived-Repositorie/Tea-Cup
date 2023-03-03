@@ -4,6 +4,7 @@
   "package": "io.github.justfoxx.teacup.v1.mixins",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "ServerPlayerInteractionManagerMixin"
   ],
   "injectors": {
     "defaultRequire": 1
