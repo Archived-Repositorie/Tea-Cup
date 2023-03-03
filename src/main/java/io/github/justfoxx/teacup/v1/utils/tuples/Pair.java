@@ -20,4 +20,8 @@ public class Pair <A, B> implements Tuple<A> {
     public B getB() {
         return b;
     }
+
+    public static <A, B> Pair<A, B> of(A a, B b) {
+        return new Pair<>(a, b);
+    }
 }

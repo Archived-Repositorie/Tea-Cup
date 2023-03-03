@@ -10,4 +10,8 @@ public class Singleton<A> implements Tuple<A> {
     public A getA() {
         return a;
     }
+
+    public static <A> Singleton<A> of(A a) {
+        return new Singleton<>(a);
+    }
 }

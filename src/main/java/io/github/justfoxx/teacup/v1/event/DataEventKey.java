@@ -1,33 +1,40 @@
 package io.github.justfoxx.teacup.v1.event;
 
-import com.google.common.collect.ImmutableSet;
+import io.github.justfoxx.teacup.v1.registry.MapRegistry;
+import io.github.justfoxx.teacup.v1.utils.ThrowingBiConsumer;
 import io.github.justfoxx.teacup.v1.utils.ThrowingConsumer;
 import io.github.justfoxx.teacup.v1.utils.tuples.Tuple;
 
 import java.util.Map;
-import java.util.function.Consumer;
+import java.util.Set;
 
-public class DataEventKey <V,D extends Tuple<?>,T> implements Event<V,T> {
-    private final Map<V,D> registry;
-    private final Consumer<T> invoker;
+public class DataEventKey <V,D extends Tuple<?>, I> implements Event<V, I> {
+    private final MapRegistry<V,D> registry;
+    private final ThrowingBiConsumer<Set<Map.Entry<V,D>>,I> invoker;
 
-    public DataEventKey(Map<V,D> registry, ThrowingConsumer<T> invoker) {
+    private DataEventKey(MapRegistry<V,D> registry, ThrowingBiConsumer<Set<Map.Entry<V,D>>,I> invoker) {
         this.registry = registry;
         this.invoker = invoker;
     }
 
-    public Map.Entry<V,D> onEvent(V value, D data) {
-        registry.putIfAbsent(value, data);
-        return Map.entry(value, data);
+    public static <V,D extends Tuple<?>,T> DataEventKey<V,D,T> of(MapRegistry<V,D> registry, ThrowingBiConsumer<Set<Map.Entry<V,D>>,T> invoker) {
+        return new DataEventKey<>(registry, invoker);
     }
 
-    public ImmutableSet<Map.Entry<V,D>> getAll() {
-        return ImmutableSet.copyOf(registry.entrySet());
+    public static <V,D extends Tuple<?>> DataEventKey<V,D,Void> of(MapRegistry<V,D> registry, ThrowingConsumer<Set<Map.Entry<V,D>>> invoker) {
+        return DataEventKey.of(registry, ThrowingBiConsumer.convert(invoker));
+    }
+
+    public void onEvent(V value, D data) {
+        registry.add(value, data);
+    }
+
+    public Set<Map.Entry<V,D>> getAll() {
+        return registry.getAll();
     }
 
     @Override
-    public void invoke(T value) {
-        invoker.accept(value);
+    public void invoke(I data) {
+        invoker.accept(getAll(),data);
     }
-
 }

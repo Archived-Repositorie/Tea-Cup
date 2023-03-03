@@ -16,8 +16,4 @@ public interface ThrowingConsumer<T> extends Consumer<T> {
     }
 
     void acceptThrows(T elem) throws Exception;
-
-    static <T> ThrowingConsumer<T> getDefault() {
-        return c -> {};
-    }
 }

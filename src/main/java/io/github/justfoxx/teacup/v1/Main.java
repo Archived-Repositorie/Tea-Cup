@@ -7,6 +7,6 @@ public class Main implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        Events.CONFIG_EVENT.invoke(Events.CONFIG_EVENT.getAll());
+        Events.CONFIG_EVENT.invoke();
     }
 }

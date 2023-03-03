@@ -12,10 +12,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Optional;
 
-public class JsonHelper {
-    private JsonHelper() {
-    }
+public final class JsonHelper {
     public static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
     public static JsonObject readJsonObject(Path filePath) throws FileNotFoundException {
@@ -30,8 +29,11 @@ public class JsonHelper {
 
     public static JsonObject writeJsonObject(Object data, Path filePath) throws Exception {
         var jsonObject = GSON.toJsonTree(data).getAsJsonObject();
-
         return writeJsonObject(jsonObject,filePath);
+    }
+
+    public static JsonObject getDefaultJsonObject(Optional<Object> defaultObject, Path path) throws Exception {
+        return defaultObject.isPresent() ? writeJsonObject(defaultObject.get(), path) : new JsonObject();
     }
 
     private static JsonObject jsonReader(File file) throws FileNotFoundException {
@@ -42,5 +44,8 @@ public class JsonHelper {
     private static JsonObject jsonWriter(JsonObject data, File file) throws IOException {
         Files.writeString(file.toPath(), GSON.toJson(data));
         return jsonReader(file);
+    }
+
+    private JsonHelper() {
     }
 }

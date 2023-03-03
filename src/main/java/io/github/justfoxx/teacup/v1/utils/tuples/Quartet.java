@@ -14,4 +14,8 @@ public class Quartet <A, B, C, D> extends Triplet<A,B,C> {
     public D getD() {
         return d;
     }
+
+    public static <A, B, C, D> Quartet<A, B, C, D> of(A a, B b, C c, D d) {
+        return new Quartet<>(a, b, c, d);
+    }
 }

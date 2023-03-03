@@ -14,4 +14,8 @@ public class Quintet <A, B, C, D, E> extends Quartet<A,B,C,D> {
     public E getE() {
         return e;
     }
+
+    public static <A, B, C, D, E> Quintet<A, B, C, D, E> of(A a, B b, C c, D d, E e) {
+        return new Quintet<>(a, b, c, d, e);
+    }
 }

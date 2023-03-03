@@ -14,4 +14,8 @@ public class Triplet <A, B, C> extends Pair<A,B> {
     public C getC() {
         return c;
     }
+
+    public static <A, B, C> Triplet<A, B, C> of(A a, B b, C c) {
+        return new Triplet<>(a, b, c);
+    }
 }
