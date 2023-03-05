@@ -5,9 +5,9 @@ import io.github.justfoxx.teacup.v1.event.data.OnItemUseData;
 import io.github.justfoxx.teacup.v1.registry.MapRegistry;
 import io.github.justfoxx.teacup.v1.utils.Mod;
 import io.github.justfoxx.teacup.v1.utils.ThrowingConsumer;
-import io.github.justfoxx.teacup.v1.utils.tuples.Pair;
 import net.minecraft.util.ActionResult;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import oshi.util.tuples.Pair;
 
 import java.util.Optional;
 import java.util.function.Function;

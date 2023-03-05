@@ -1,7 +1,7 @@
 package io.github.justfoxx.teacup.v1.registry;
 
 import com.google.common.collect.ImmutableSet;
-import io.github.justfoxx.teacup.v1.utils.tuples.Pair;
+import oshi.util.tuples.Pair;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -24,7 +24,7 @@ public class MapRegistry<K,V> {
         Objects.requireNonNull(value);
         Objects.requireNonNull(key);
         registry.putIfAbsent(key, value);
-        return Pair.of(key, value);
+        return new Pair<>(key, value);
     }
 
     /**
