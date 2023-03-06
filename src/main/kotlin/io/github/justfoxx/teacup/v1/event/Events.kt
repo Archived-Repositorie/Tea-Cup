@@ -19,8 +19,7 @@ object Events {
     val CONFIG: DataEventKey<
                 (JsonObject) -> Unit,
             Pair<Mod, Optional<Any>>,
-            Void
-            > =
+            Nothing> =
         DataEventKey(
             MapRegistry()
         ) { data, _ -> EventFunctions.configEvent(data) }
@@ -34,5 +33,5 @@ object Events {
             Pair<OnItemUseData, CallbackInfoReturnable<ActionResult>>> =
         DataEventKey(
             MapRegistry()
-            ) { data, info -> EventFunctions.onItemUse(data, info!!) }
+        ) { data, info -> EventFunctions.onItemUse(data, info!!) }
 }

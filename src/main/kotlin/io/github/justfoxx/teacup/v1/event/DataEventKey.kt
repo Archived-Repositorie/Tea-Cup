@@ -4,21 +4,14 @@ import io.github.justfoxx.teacup.v1.registry.MapRegistry
 
 /**
  * A class used for creating event keys that require additional data to be passed to the event invoker.
- * @param <V> The type of the value stored in the registry.
- * @param <D> The type of the additional data required by the event invoker.
- * @param <I> The type of additional data required by the event invoker (if not present, use Void).
-</I></D></V> */
+ * @param V The type of the value stored in the registry.
+ * @param D The type of the additional data required by the event invoker.
+ * @param I The type of additional data required by the event invoker (if not present, use [Nothing]).
+ */
 class DataEventKey<V, D, I> constructor(
-    registry: MapRegistry<V, D>,
-    invoker: (Set<Map.Entry<V, D>>, I?) -> Unit
-) : Event<V, I> {
-    private val registry: MapRegistry<V, D>
+    private val registry: MapRegistry<V, D>,
     private val invoker: (Set<Map.Entry<V, D>>, I?) -> Unit
-
-    init {
-        this.registry = registry
-        this.invoker = invoker
-    }
+) : Event<V, I> {
 
     /**
      * Registers a new value with the specified data for this event.
@@ -29,11 +22,11 @@ class DataEventKey<V, D, I> constructor(
         registry.add(value, data)
     }
 
+    /**
+     * Returns a set containing all registered values and their associated data.
+     * @return A set containing all registered values and their associated data.
+     */
     val all: Set<Map.Entry<V, D>>
-        /**
-         * Returns a set containing all registered values and their associated data.
-         * @return A set containing all registered values and their associated data.
-         */
         get() = registry.all
 
     /**

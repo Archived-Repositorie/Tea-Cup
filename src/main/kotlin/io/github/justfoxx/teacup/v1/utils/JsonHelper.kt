@@ -14,16 +14,20 @@ import java.nio.file.Path
 import java.util.*
 
 /**
- * A class that helps with json
+ * A utility class for working with JSON data.
  */
 object JsonHelper {
+    /**
+     * The default Gson object used for parsing and formatting JSON data.
+     */
     val GSON: Gson = GsonBuilder().setPrettyPrinting().create()
 
     /**
-     * Reads a json object from a file
-     * @param filePath The path to the json file
-     * @return The json object
-     * @throws FileNotFoundException If the file is not found
+     * Reads a JSON object from a file.
+     *
+     * @param filePath The path to the JSON file.
+     * @return The JSON object.
+     * @throws FileNotFoundException If the file is not found.
      */
     @Throws(FileNotFoundException::class)
     fun readJsonObject(filePath: Path): JsonObject {
@@ -32,11 +36,12 @@ object JsonHelper {
     }
 
     /**
-     * Writes a json object to a file
-     * @param data The data to write to the file
-     * @param filePath The path to the file
-     * @return The json object
-     * @throws Exception If the file is not found or if the data cannot be written to the file
+     * Writes a JSON object to a file.
+     *
+     * @param data The JSON object to write to the file.
+     * @param filePath The path to the file.
+     * @return The JSON object.
+     * @throws Exception If the file is not found or if the data cannot be written to the file.
      */
     @Throws(Exception::class)
     fun writeJsonObject(data: JsonObject, filePath: Path): JsonObject {
@@ -45,11 +50,12 @@ object JsonHelper {
     }
 
     /**
-     * Writes a json object to a file
-     * @param data The data to write to the file
-     * @param filePath The path to the file
-     * @return The json object
-     * @throws Exception If the file is not found or if the data cannot be written to the file
+     * Converts an object to a JSON object and writes it to a file.
+     *
+     * @param data The object to convert to a JSON object and write to the file.
+     * @param filePath The path to the file.
+     * @return The JSON object.
+     * @throws Exception If the file is not found or if the data cannot be written to the file.
      */
     @Throws(Exception::class)
     fun writeJsonObject(data: Any, filePath: Path): JsonObject {
@@ -58,16 +64,17 @@ object JsonHelper {
     }
 
     /**
-     * Writes a json object to a file
-     * @param defaultObject The default object to write to the file if the file does not exist
-     * @param path The path to the file
-     * @return The json object
-     * @throws Exception If the file is not found or if the data cannot be written to the file
+     * Gets a default JSON object from a file. If the file does not exist, writes the default object to the file.
+     *
+     * @param defaultObject The default object to write to the file if the file does not exist.
+     * @param filePath The path to the file.
+     * @return The JSON object.
+     * @throws Exception If the file is not found or if the data cannot be written to the file.
      */
     @Throws(Exception::class)
-    fun getDefaultJsonObject(defaultObject: Optional<Any>, path: Path): JsonObject {
+    fun getDefaultJsonObject(defaultObject: Optional<Any>, filePath: Path): JsonObject {
         return if (defaultObject.isPresent)
-            writeJsonObject(defaultObject.get(), path)
+            writeJsonObject(defaultObject.get(), filePath)
         else
             JsonObject()
     }

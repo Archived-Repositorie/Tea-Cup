@@ -10,12 +10,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable
 import oshi.util.tuples.Pair
 import java.nio.file.Files
 import java.util.*
-
 /**
  * A class that holds all the event functions
  */
 internal object EventFunctions {
-    @Throws(Exception::class)
+    /**
+     * The function that gets called when the config is loaded
+     */
     fun configEvent(
         entries: Set<Map.Entry<(JsonObject) -> Unit, Pair<Mod, Optional<Any>>>>
     ) {
@@ -35,6 +36,9 @@ internal object EventFunctions {
         }
     }
 
+    /**
+     * The function that gets called when a player uses an item
+     */
     fun onItemUse(
         entries: Set<Map.Entry<(OnItemUseData) -> ActionResult, (OnItemUseData) -> Boolean>>,
         data: Pair<OnItemUseData, CallbackInfoReturnable<ActionResult>>

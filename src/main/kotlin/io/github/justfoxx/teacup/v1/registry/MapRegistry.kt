@@ -1,17 +1,22 @@
 package io.github.justfoxx.teacup.v1.registry
 
-import com.google.common.collect.ImmutableSet
 import oshi.util.tuples.Pair
 import java.util.concurrent.ConcurrentHashMap
 
+/**
+ * A thread-safe registry that stores key-value pairs.
+ */
 class MapRegistry<K, V> {
+
+    // Use ConcurrentHashMap to ensure thread-safety
     private val registry: MutableMap<K, V> = ConcurrentHashMap()
 
     /**
-     * Adds a key and value to the registry
-     * @param key The key to add
-     * @param value The value to add
-     * @return A pair of the key and value
+     * Adds a key-value pair to the registry.
+     *
+     * @param key The key to add.
+     * @param value The value to add.
+     * @return A Pair of the added key and value.
      */
     fun add(key: K, value: V): Pair<K, V> {
         registry.putIfAbsent(key, value)
@@ -19,18 +24,20 @@ class MapRegistry<K, V> {
     }
 
     /**
-     * Gets a value from the registry
-     * @param key The key to get
-     * @return The value associated with the key
+     * Gets the value associated with the given key from the registry.
+     *
+     * @param key The key to get the value for.
+     * @return The value associated with the key, or null if the key is not found in the registry.
      */
     operator fun get(key: K): V? {
         return registry[key]
     }
 
-    val all: ImmutableSet<Map.Entry<K, V>>
-        /**
-         * Gets all the entries in the registry
-         * @return All the entries in the registry
-         */
-        get() = ImmutableSet.copyOf(registry.entries)
+    /**
+     * Gets an immutable set of all key-value pairs in the registry.
+     *
+     * @return An immutable set of all key-value pairs in the registry.
+     */
+    val all: Set<Map.Entry<K, V>>
+        get() = registry.entries.toSet()
 }
