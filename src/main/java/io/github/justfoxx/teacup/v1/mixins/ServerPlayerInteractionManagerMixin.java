@@ -18,6 +18,6 @@ import oshi.util.tuples.Pair;
 public class ServerPlayerInteractionManagerMixin {
     @Inject(method = "interactItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;use(Lnet/minecraft/world/World;Lnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/util/Hand;)Lnet/minecraft/util/TypedActionResult;"))
     private void onInteractItem(ServerPlayerEntity player, World world, ItemStack stack, Hand hand, CallbackInfoReturnable<ActionResult> cir) {
-        Events.ON_ITEM_USE.invoke(new Pair<>(new OnItemUseData(player, stack, hand), cir));
+        Events.INSTANCE.getON_ITEM_USE().invoke(new Pair<>(new OnItemUseData(player, stack, hand), cir));
     }
 }

@@ -17,10 +17,16 @@
   "environment": "*",
   "entrypoints": {
     "preLaunch": [
-      "io.github.justfoxx.teacup.PreMain"
+      {
+        "adapter": "kotlin",
+        "value": "io.github.justfoxx.teacup.PreMainKt::init"
+      }
     ],
     "main": [
-      "io.github.justfoxx.teacup.v1.Main"
+      {
+        "adapter": "kotlin",
+        "value": "io.github.justfoxx.teacup.v1.MainKt::init"
+      }
     ]
   },
   "mixins": [
