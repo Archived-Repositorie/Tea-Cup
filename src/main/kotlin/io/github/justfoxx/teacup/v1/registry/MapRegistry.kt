@@ -7,8 +7,6 @@ import java.util.concurrent.ConcurrentHashMap
  * A thread-safe registry that stores key-value pairs.
  */
 class MapRegistry<K, V> {
-
-    // Use ConcurrentHashMap to ensure thread-safety
     private val registry: MutableMap<K, V> = ConcurrentHashMap()
 
     /**

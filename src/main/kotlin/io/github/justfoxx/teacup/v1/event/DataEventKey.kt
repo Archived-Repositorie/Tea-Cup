@@ -26,7 +26,7 @@ class DataEventKey<V, D, I> constructor(
      * Returns a set containing all registered values and their associated data.
      * @return A set containing all registered values and their associated data.
      */
-    val all: Set<Map.Entry<V, D>>
+    private val all: Set<Map.Entry<V, D>>
         get() = registry.all
 
     /**

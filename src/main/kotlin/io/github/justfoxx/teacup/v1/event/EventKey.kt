@@ -2,6 +2,7 @@ package io.github.justfoxx.teacup.v1.event
 
 import io.github.justfoxx.teacup.v1.registry.SetRegistry
 
+
 /**
  * An implementation of Event that should be used when registry values don't need additional data.
  *
@@ -28,7 +29,7 @@ class EventKey<V, I> constructor(
      *
      * @return All registered values.
      */
-    val all: Set<V>
+    private val all: Set<V>
         get() = registry.all
 
     /**

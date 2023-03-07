@@ -7,7 +7,6 @@ import com.google.common.collect.ImmutableSet
  * @param V The type of values stored in the registry.
  */
 class SetRegistry<V> {
-    // Initialize the registry with MapRegistry, which stores values by reference.
     private val registry = MapRegistry<V, Any>()
 
     /**

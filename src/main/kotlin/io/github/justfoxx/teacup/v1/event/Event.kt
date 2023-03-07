@@ -10,5 +10,5 @@ interface Event<V, I> {
      * Invoke the event
      * @param value Additional data to be passed to the event
      */
-    fun invoke(value: I? = null)
+    operator fun invoke(value: I? = null)
 }
