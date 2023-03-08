@@ -19,13 +19,13 @@
     "preLaunch": [
       {
         "adapter": "kotlin",
-        "value": "io.github.justfoxx.teacup.PreMainKt::init"
+        "value": "io.github.justfoxx.teacup.MainKt::preInit"
       }
     ],
     "main": [
       {
         "adapter": "kotlin",
-        "value": "io.github.justfoxx.teacup.v1.MainKt::init"
+        "value": "io.github.justfoxx.teacup.MainKt::init"
       }
     ]
   },

@@ -1,21 +1,17 @@
 package io.github.justfoxx.teacup.v1.utils
 
-import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.util.Identifier
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import java.nio.file.Path
-import java.util.Optional
 
 /**
  * A class representing a Fabric mod.
  * @param name The name of the mod.
  */
-class Mod(private val name: String, val configClass: Optional<Any> = Optional.empty()) {
-    // Initialize a logger for the mod.
+class Mod(private val name: String) {
     val logger: Logger = LoggerFactory.getLogger(name)
-    // Initialize a path for the mod's configuration file.
-    val configPath: Path = FabricLoader.getInstance().configDir.resolve("$name.json")
+    val configPath: Path = Path.of("$name.json")
 
     /**
      * Gets the identifier for a resource.

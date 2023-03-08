@@ -72,11 +72,15 @@ object JsonHelper {
      * @throws Exception If the file is not found or if the data cannot be written to the file.
      */
     @Throws(Exception::class)
-    fun getDefaultJsonObject(defaultObject: Optional<Any>, filePath: Path): JsonObject {
-        return if (defaultObject.isPresent)
-            writeJsonObject(defaultObject.get(), filePath)
+    fun getDefaultJsonObject(defaultObject: Any?, filePath: Path): JsonObject {
+        return if (defaultObject != null)
+            writeJsonObject(defaultObject, filePath)
         else
             JsonObject()
+    }
+
+    fun <T> convert(jsonObject: JsonObject, clazz: Class<T>): T {
+        return GSON.fromJson(jsonObject, clazz)
     }
 
     @Throws(FileNotFoundException::class)
@@ -90,4 +94,5 @@ object JsonHelper {
         Files.writeString(file.toPath(), GSON.toJson(data))
         return jsonReader(file)
     }
+
 }
