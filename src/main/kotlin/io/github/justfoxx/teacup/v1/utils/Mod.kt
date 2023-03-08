@@ -18,7 +18,7 @@ class Mod(private val name: String) {
      * @param path The path to the resource.
      * @return The identifier for the resource.
      */
-    fun idOf(path: String?): Identifier {
+    fun idOf(path: String): Identifier {
         return Identifier(name, path)
     }
 }

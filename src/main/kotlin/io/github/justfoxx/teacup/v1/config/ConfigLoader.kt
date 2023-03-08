@@ -1,7 +1,9 @@
 package io.github.justfoxx.teacup.v1.config
 
 import com.google.gson.JsonObject
-import io.github.justfoxx.teacup.v1.utils.JsonHelper
+import io.github.justfoxx.teacup.v1.utils.convertTo
+import io.github.justfoxx.teacup.v1.utils.getDefaultJsonObject
+import io.github.justfoxx.teacup.v1.utils.readJsonObject
 import net.fabricmc.loader.api.FabricLoader
 import java.nio.file.Files
 import java.nio.file.Path
@@ -20,16 +22,15 @@ object ConfigLoader {
 
         val configObject: JsonObject = if (Files.notExists(configPath)) {
             Files.createFile(configPath)
-            JsonHelper.getDefaultJsonObject(
-                configClass,
-                configPath
+            configPath.getDefaultJsonObject(
+                configClass
             )
         } else {
-            JsonHelper.readJsonObject(configPath)
+            configPath.readJsonObject()
         }
 
         return if (configClass != null)
-            Pair(Optional.ofNullable(JsonHelper.convert(configObject, configClass)), configObject)
+            Pair(Optional.ofNullable(configObject.convertTo(configClass)), configObject)
         else
             Pair(Optional.empty(), configObject)
     }
