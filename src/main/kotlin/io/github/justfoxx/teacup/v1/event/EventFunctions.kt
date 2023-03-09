@@ -2,6 +2,7 @@ package io.github.justfoxx.teacup.v1.event
 
 import io.github.justfoxx.teacup.v1.event.data.OnItemUseData
 import net.minecraft.entity.Entity
+import net.minecraft.server.MinecraftServer
 
 /**
  * A class that holds all the event functions
@@ -25,6 +26,15 @@ internal object EventFunctions {
     ) {
         for (value in entries) {
             value.invoke(data)
+        }
+    }
+
+    fun onServer(
+        entries: Set<(MinecraftServer) -> Unit>,
+        data: MinecraftServer
+    ) {
+        for (entry in entries) {
+            entry.invoke(data)
         }
     }
 }

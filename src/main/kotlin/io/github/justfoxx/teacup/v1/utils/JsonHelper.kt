@@ -4,6 +4,7 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
+import com.google.gson.JsonSyntaxException
 import com.google.gson.stream.JsonReader
 import java.io.File
 import java.io.FileNotFoundException
@@ -74,6 +75,7 @@ fun Path.getDefaultJsonObject(defaultObject: Any?): JsonObject {
  * @param type The class of the object to convert to.
  * @return The Java object converted from the JSON object.
  */
+@Throws(JsonSyntaxException::class)
 fun <T> JsonObject.convertTo(type: Class<T>): T {
     return GSON.fromJson(this, type)
 }
