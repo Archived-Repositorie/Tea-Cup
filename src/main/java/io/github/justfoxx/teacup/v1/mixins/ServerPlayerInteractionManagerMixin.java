@@ -17,11 +17,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class ServerPlayerInteractionManagerMixin {
     @Inject(method = "interactItem", at = @At(value = "HEAD", target = "Lnet/minecraft/item/ItemStack;use(Lnet/minecraft/world/World;Lnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/util/Hand;)Lnet/minecraft/util/TypedActionResult;"), cancellable = true)
     private void onInteractingItem(ServerPlayerEntity player, World world, ItemStack stack, Hand hand, CallbackInfoReturnable<ActionResult> cir) {
-        Events.getON_ITEM_USING().invoke(new OnItemUseData(player, stack, hand, cir));
+        Events.getON_ITEM_USING().invoker().invoke(new OnItemUseData(player, stack, hand, cir));
     }
 
     @Inject(method = "interactItem", at = @At(value = "RETURN", target = "Lnet/minecraft/item/ItemStack;use(Lnet/minecraft/world/World;Lnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/util/Hand;)Lnet/minecraft/util/TypedActionResult;"), cancellable = true)
     private void onInteractedItem(ServerPlayerEntity player, World world, ItemStack stack, Hand hand, CallbackInfoReturnable<ActionResult> cir) {
-        Events.getON_ITEM_USED().invoke(new OnItemUseData(player, stack, hand, cir));
+        Events.getON_ITEM_USED().invoker().invoke(new OnItemUseData(player, stack, hand, cir));
     }
 }

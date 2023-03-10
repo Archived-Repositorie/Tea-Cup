@@ -12,6 +12,7 @@ version = project.mod_version + "+" + project.minecraft_version
 group = project.maven_group
 
 repositories {
+	mavenCentral()
 	maven { url "https://jitpack.io" }
 }
 

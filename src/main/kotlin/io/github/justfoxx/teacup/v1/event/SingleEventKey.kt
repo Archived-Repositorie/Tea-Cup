@@ -2,16 +2,14 @@ package io.github.justfoxx.teacup.v1.event
 
 import io.github.justfoxx.teacup.v1.registry.SetRegistry
 
-
 /**
- * An implementation of the Event interface that can be used when both registry and invoker are different type.
- * @param <V> The type of the value passed to the event.
- * @param <I> The type of the invoker lambda used to trigger the event.
+ * An implementation of the Event interface that can be used when both registry and invoker are of the same type.
+ * @param V The type of the value passed to the event.
  */
-class EventKey<V, I>(
+class SingleEventKey<V>(
     registry: SetRegistry<V> = SetRegistry(),
-    invoker: (Set<V>) -> I
-) : AbstractEvent<V, I>(registry, invoker) {
+    invoker: (Set<V>) -> V
+) : AbstractEvent<V, V>(registry, invoker) {
 
     /**
      * Returns a set containing all values registered in the event.
@@ -22,10 +20,10 @@ class EventKey<V, I>(
     }
 
     /**
-     * Returns the invoker lambda used to trigger the event.
-     * @return The invoker lambda.
+     * Returns the value that will be passed to the invoker lambda when the event is triggered.
+     * @return The value passed to the invoker lambda.
      */
-    override fun invoker(): I {
+    override fun invoker(): V {
         return invoker.invoke(getAll())
     }
 

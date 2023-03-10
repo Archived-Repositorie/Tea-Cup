@@ -1,14 +1,20 @@
 package io.github.justfoxx.teacup.v1.event
 
 /**
- * An event that can be invoked
- * @param <V> The type of the value
- * @param <I> The type of the invoker additional data (use Nothing if not needed)
-</I></V> */
+ * An event that can be invoked.
+ * @param V The type of the value passed to the event.
+ * @param I The type of the invoker lambda.
+ */
 interface Event<V, I> {
     /**
-     * Invoke the event
-     * @param value Additional data to be passed to the event
+     * Returns the invoker object.
+     * @return The invoker object.
      */
-    operator fun invoke(value: I? = null)
+    fun invoker(): I
+
+    /**
+     * Called when the event is triggered with the given value.
+     * @param value The value passed to the event.
+     */
+    fun onEvent(value: V)
 }
