@@ -1,5 +1,6 @@
 package io.github.justfoxx.teacup
 
+import io.github.justfoxx.teacup.v1.event.Events
 import io.github.justfoxx.teacup.v1.utils.Mod
 import java.util.*
 
@@ -12,8 +13,12 @@ fun preInit() {
 
 @Suppress("unused")
 fun init() {
-    return
+    Events.ON_ENTITY_DIED.onEvent({entity ->
+        return@onEvent
+    })
 }
+
+
 
 
 

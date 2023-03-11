@@ -12,9 +12,11 @@ interface Event<V, I> {
      */
     fun invoker(): I
 
-    /**
-     * Called when the event is triggered with the given value.
-     * @param value The value passed to the event.
-     */
-    fun onEvent(value: V)
+    enum class Priority {
+        LOWEST,
+        LOW,
+        NORMAL,
+        HIGH,
+        HIGHEST
+    }
 }

@@ -1,7 +1,7 @@
 package io.github.justfoxx.teacup.v1.mixins;
 
 import io.github.justfoxx.teacup.v1.event.Events;
-import io.github.justfoxx.teacup.v1.event.data.OnItemUseData;
+import io.github.justfoxx.teacup.v1.event.OnItemUseData;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.network.ServerPlayerInteractionManager;

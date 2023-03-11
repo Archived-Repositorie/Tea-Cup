@@ -1,14 +1,14 @@
 package io.github.justfoxx.teacup.v1.event
 
-import io.github.justfoxx.teacup.v1.registry.SetRegistry
+import io.github.justfoxx.teacup.v1.registry.SortedRegistry
 
 /**
  * An abstract base class for implementing an event with a set of values and an invoker.
  * @param V The type of the value passed to the event.
  * @param I The type of the invoker lambda used to trigger the event.
  */
-abstract class AbstractEvent<V, I>(
-    protected val registry: SetRegistry<V> = SetRegistry(),
+abstract class AbstractEvent<V,I>(
+    protected val registry: SortedRegistry<V,Event.Priority>,
     protected val invoker: (Set<V>) -> I
 ) : Event<V, I> {
 
@@ -24,7 +24,7 @@ abstract class AbstractEvent<V, I>(
      * Called when the event is triggered with the given value.
      * @param value The value passed to the event.
      */
-    abstract override fun onEvent(value: V)
+    abstract fun onEvent(value: V, priority: Event.Priority = Event.Priority.NORMAL)
 
     /**
      * Returns a set containing all values registered in the event.
