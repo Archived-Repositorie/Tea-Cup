@@ -1,7 +1,6 @@
 package io.github.justfoxx.teacup.v1.event
 
 import io.github.justfoxx.teacup.v1.registry.SortedRegistry
-import io.github.justfoxx.teacup.v1.utils.toSet
 
 /**
  * An implementation of the Event interface that can be used when both registry and invoker are of the same type.
@@ -9,15 +8,15 @@ import io.github.justfoxx.teacup.v1.utils.toSet
  */
 class SingletonEvent<V>(
     registry: SortedRegistry<V, Event.Priority> = SortedRegistry(),
-    invoker: (Set<V>) -> V
+    invoker: (List<V>) -> V
 ) : AbstractEvent<V, V>(registry, invoker) {
 
     /**
      * Returns a set containing all values registered in the event.
      * @return The set of registered values.
      */
-    override fun getAll(): Set<V> {
-        return registry.all.toSet()
+    override fun getAll(): List<V> {
+        return registry.all
     }
 
     /**

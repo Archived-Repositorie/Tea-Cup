@@ -4,7 +4,7 @@ import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.text.Text
 
 internal fun <V> onIterator(
-    entries: Set<(V) -> Unit>,
+    entries: Iterable<(V) -> Unit>,
     data: V
 ) {
     for (entry in entries) {
@@ -13,7 +13,7 @@ internal fun <V> onIterator(
 }
 
 internal fun onMessageModifier(
-    entries: Set<(Text, ServerPlayerEntity) -> Text>,
+    entries: Iterable<(Text, ServerPlayerEntity) -> Text>,
     data: Pair<Text, ServerPlayerEntity>
 ): Text {
     var text = data.first

@@ -5,9 +5,6 @@ import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.server.MinecraftServer
 
-/**
- * A singleton object that contains event keys for all supported events.
- */
 object Events {
 
     /**

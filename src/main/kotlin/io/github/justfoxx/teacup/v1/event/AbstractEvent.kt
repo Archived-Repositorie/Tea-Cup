@@ -9,26 +9,13 @@ import io.github.justfoxx.teacup.v1.registry.SortedRegistry
  */
 abstract class AbstractEvent<V,I>(
     protected val registry: SortedRegistry<V,Event.Priority>,
-    protected val invoker: (Set<V>) -> I
+    protected val invoker: (List<V>) -> I
 ) : Event<V, I> {
-
-    /**
-     * Returns the invoker lambda used to trigger the event.
-     * @return The invoker lambda.
-     */
     override fun invoker(): I {
         return invoker(getAll())
     }
 
-    /**
-     * Called when the event is triggered with the given value.
-     * @param value The value passed to the event.
-     */
     abstract fun onEvent(value: V, priority: Event.Priority = Event.Priority.NORMAL)
 
-    /**
-     * Returns a set containing all values registered in the event.
-     * @return The set of registered values.
-     */
-    protected abstract fun getAll(): Set<V>
+    protected abstract fun getAll(): List<V>
 }
