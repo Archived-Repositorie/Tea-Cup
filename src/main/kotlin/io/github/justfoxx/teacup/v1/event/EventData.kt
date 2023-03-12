@@ -34,3 +34,13 @@ data class OnItemUseData(
     val hand: Hand,
     val itemUseResult: CallbackInfoReturnable<ActionResult>,
 )
+
+data class TextData(
+    val text: Text,
+    val player: ServerPlayerEntity,
+)
+
+data class SingletonData<T> (
+    val data: T,
+    val info: CallbackInfo,
+)

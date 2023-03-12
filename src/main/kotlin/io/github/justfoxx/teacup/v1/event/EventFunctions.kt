@@ -1,6 +1,5 @@
 package io.github.justfoxx.teacup.v1.event
 
-import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.text.Text
 
 internal fun <V> onIterator(
@@ -12,14 +11,14 @@ internal fun <V> onIterator(
     }
 }
 
-internal fun onMessageModifier(
-    entries: Iterable<(Text, ServerPlayerEntity) -> Text>,
-    data: Pair<Text, ServerPlayerEntity>
+internal fun onTextModifier(
+    entries: List<(TextData) -> Text>,
+    data: TextData
 ): Text {
-    var text = data.first
-    val player = data.second
+    var text = data.text
+    val player = data.player
     for (entry in entries) {
-        text = entry.invoke(text, player)
+        text = entry.invoke(TextData(text, player))
     }
     return text
 }
