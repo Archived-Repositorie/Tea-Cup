@@ -10,10 +10,10 @@ interface Event<V, I> {
     fun invoker(): I
 
     enum class Priority {
-        LOWEST,
-        LOW,
-        NORMAL,
+        HIGHEST,
         HIGH,
-        HIGHEST
+        NORMAL,
+        LOW,
+        LOWEST
     }
 }
