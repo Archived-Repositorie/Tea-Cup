@@ -35,7 +35,7 @@ data class OnItemUseData(
     val itemUseResult: CallbackInfoReturnable<ActionResult>,
 )
 
-data class TextData(
+data class MessageTextData(
     val text: Text,
     val player: ServerPlayerEntity,
 )

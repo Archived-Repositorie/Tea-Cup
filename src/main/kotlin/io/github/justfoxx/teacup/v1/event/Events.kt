@@ -4,9 +4,12 @@ import io.github.justfoxx.teacup.v1.registry.SortedRegistry
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.server.MinecraftServer
+import net.minecraft.text.Style
 import net.minecraft.text.Text
+import net.minecraft.text.TextContent
 
 object Events {
+
 
     /**
      * Event key for when the server is starting up.
@@ -127,8 +130,23 @@ object Events {
             onIterator(data, info)
         }}
 
-    @JvmStatic val ON_MESSAGE_MODIFY: SingletonEvent<(TextData) -> Text> =
+    @JvmStatic val ON_MESSAGE_MODIFY: SingletonEvent<(MessageTextData) -> Text> =
+        SingletonEvent(SortedRegistry()) { data -> { info ->
+            onMessageTextModifier(data, info)
+        }}
+
+    @JvmStatic val ON_TEXT_STYLE_MODIFY: SingletonEvent<(Style) -> Style> =
+        SingletonEvent(SortedRegistry()) { data -> { info ->
+            onTextStyleModifier(data, info)
+        }}
+
+    @JvmStatic val ON_TEXT_CONTENT_MODIFY: SingletonEvent<(TextContent) -> TextContent> =
         SingletonEvent(SortedRegistry()) { data -> { info ->
             onTextModifier(data, info)
+        }}
+
+    @JvmStatic val ON_TEXT_SIBLINGS_MODIFY : SingletonEvent<(List<Text>) -> List<Text>> =
+        SingletonEvent(SortedRegistry()) { data -> { info ->
+            onTextSiblingsModifier(data, info)
         }}
 }

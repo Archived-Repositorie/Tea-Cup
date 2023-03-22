@@ -4,6 +4,10 @@ plugins {
 	id 'org.jetbrains.kotlin.jvm'
 }
 
+loom {
+	serverOnlyMinecraftJar()
+}
+
 sourceCompatibility = JavaVersion.VERSION_17
 targetCompatibility = JavaVersion.VERSION_17
 
@@ -12,7 +16,6 @@ version = project.mod_version + "+" + project.minecraft_version
 group = project.maven_group
 
 repositories {
-	mavenCentral()
 	maven { url "https://jitpack.io" }
 }
 
