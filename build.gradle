@@ -4,9 +4,9 @@ plugins {
 	id 'org.jetbrains.kotlin.jvm'
 }
 
-loom {
-	serverOnlyMinecraftJar()
-}
+//loom {
+//	serverOnlyMinecraftJar()
+//}
 
 sourceCompatibility = JavaVersion.VERSION_17
 targetCompatibility = JavaVersion.VERSION_17
