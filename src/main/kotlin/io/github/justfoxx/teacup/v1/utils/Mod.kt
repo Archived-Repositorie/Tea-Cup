@@ -9,7 +9,7 @@ import java.nio.file.Path
  * A class representing a Fabric mod.
  * @param name The name of the mod.
  */
-class Mod(private val name: String) {
+class Mod(val name: String) {
     val logger: Logger = LoggerFactory.getLogger(name)
     val configPath: Path = Path.of("$name.json")
 

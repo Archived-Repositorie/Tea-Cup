@@ -17,14 +17,11 @@ object ConfigLoader {
      * @param configClass The class of the configuration object. If null, returns the raw JSON object.
      * @return A Pair of an Optional of the loaded configuration object, and the raw JSON object.
      */
-    fun <T> loadOrCreateConfigFile(path: Path, configClass: Class<T>? = null): Pair<Optional<T & Any>, JsonObject> {
+    @JvmStatic fun <T> loadOrCreateConfigFile(path: Path, configClass: Class<T>? = null): Pair<Optional<T & Any>, JsonObject> {
         val configPath = FabricLoader.getInstance().configDir.resolve(path)
 
         val configObject: JsonObject = if (Files.notExists(configPath)) {
-            Files.createFile(configPath)
-            configPath.getDefaultJsonObject(
-                configClass
-            )
+            createConfigFile(configPath, configClass)
         } else {
             configPath.readJsonObject()
         }
@@ -34,5 +31,12 @@ object ConfigLoader {
             Pair(Optional.ofNullable(configObject.convertTo(configClass)), configObject)
         else
             Pair(Optional.empty(), configObject)
+    }
+
+    private fun createConfigFile(configPath: Path, configClass: Class<*>? = null): JsonObject {
+        Files.createFile(configPath)
+        return configPath.getDefaultJsonObject(
+            configClass
+        )
     }
 }
