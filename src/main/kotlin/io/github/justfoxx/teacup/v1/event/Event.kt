@@ -8,12 +8,5 @@ package io.github.justfoxx.teacup.v1.event
 interface Event<V, I> {
 
     fun invoker(): I
-
-    enum class Priority {
-        HIGHEST,
-        HIGH,
-        NORMAL,
-        LOW,
-        LOWEST
-    }
+    fun getAll(): List<V>
 }

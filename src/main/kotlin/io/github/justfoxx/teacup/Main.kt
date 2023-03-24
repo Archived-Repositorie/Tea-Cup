@@ -1,7 +1,5 @@
 package io.github.justfoxx.teacup
 
-import io.github.justfoxx.teacup.v1.event.Event
-import io.github.justfoxx.teacup.v1.event.Events
 import io.github.justfoxx.teacup.v1.utils.Mod
 import java.util.*
 
@@ -14,19 +12,7 @@ fun preInit() {
 
 @Suppress("unused")
 fun init() {
-    //test
-//    Events.ON_SERVER_STARTING.onEvent({ server ->
-//        mod.logger.info("Server is ticking lowest ${Date()} ${server.ticks}")
-//    },Event.Priority.LOWEST)
-//    Events.ON_SERVER_STARTING.onEvent({ server ->
-//        mod.logger.info("Server is ticking highest ${Date()} ${server.ticks}")
-//    },Event.Priority.HIGHEST)
-//    Events.ON_SERVER_STARTING.onEvent({ server ->
-//        mod.logger.info("Server is ticking normal ${Date()} ${server.ticks}")
-//    },Event.Priority.NORMAL)
-//    Events.ON_SERVER_STARTING.onEvent({ server ->
-//        mod.logger.info("Server is ticking high ${Date()} ${server.ticks}")
-//    },Event.Priority.HIGH)
+    //todo: testing chamber
 }
 
 

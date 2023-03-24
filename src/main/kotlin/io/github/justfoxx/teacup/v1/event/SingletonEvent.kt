@@ -7,9 +7,9 @@ import io.github.justfoxx.teacup.v1.registry.SortedRegistry
  * @param V The type of the value passed to the event.
  */
 class SingletonEvent<V>(
-    registry: SortedRegistry<V, Event.Priority> = SortedRegistry(),
-    invoker: (List<V>) -> V
-) : AbstractEvent<V, V>(registry, invoker) {
+    private val registry: SortedRegistry<V, SortedEvent.Priority> = SortedRegistry(),
+    private val invoker: (List<V>) -> V
+) : SortedEvent<V, V> {
 
     /**
      * Returns a set containing all values registered in the event.
@@ -31,7 +31,7 @@ class SingletonEvent<V>(
      * Called when the event is triggered with the given value.
      * @param value The value passed to the event.
      */
-    override fun onEvent(value: V, priority: Event.Priority) {
+    override fun onEvent(value: V, priority: SortedEvent.Priority) {
         registry.register(value, priority)
     }
 }

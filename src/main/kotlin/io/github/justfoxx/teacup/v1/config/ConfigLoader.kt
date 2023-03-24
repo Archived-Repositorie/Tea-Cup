@@ -29,6 +29,7 @@ object ConfigLoader {
             configPath.readJsonObject()
         }
 
+
         return if (configClass != null)
             Pair(Optional.ofNullable(configObject.convertTo(configClass)), configObject)
         else
