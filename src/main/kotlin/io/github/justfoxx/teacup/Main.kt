@@ -3,7 +3,7 @@ package io.github.justfoxx.teacup
 import io.github.justfoxx.teacup.v1.utils.Mod
 import java.util.*
 
-val mod = Mod("teacup")
+internal val mod = Mod("teacup")
 
 @Suppress("unused")
 fun preInit() {
@@ -12,7 +12,7 @@ fun preInit() {
 
 @Suppress("unused")
 fun init() {
-
+    mod.logger.info("Loaded!")
 }
 
 
