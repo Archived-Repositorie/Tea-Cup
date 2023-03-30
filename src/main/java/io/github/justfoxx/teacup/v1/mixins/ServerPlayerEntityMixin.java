@@ -6,7 +6,6 @@ import io.github.justfoxx.teacup.v1.event.MessageTextData;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
@@ -16,6 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class ServerPlayerEntityMixin {
     @Inject(method = "sendMessageToClient", at = @At("HEAD"), cancellable = true)
     public void onSendingMessageToClient(Text message, boolean overlay, CallbackInfo ci) {
+        
         Events.getON_MESSAGE_SEND().invoker().invoke(new MessageData(message, overlay,(ServerPlayerEntity) (Object) this, ci));
     }
 
