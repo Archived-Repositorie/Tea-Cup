@@ -15,7 +15,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class ServerPlayerEntityMixin {
     @Inject(method = "sendMessageToClient", at = @At("HEAD"), cancellable = true)
     public void onSendingMessageToClient(Text message, boolean overlay, CallbackInfo ci) {
-        
         Events.getON_MESSAGE_SEND().invoker().invoke(new MessageData(message, overlay,(ServerPlayerEntity) (Object) this, ci));
     }
 
