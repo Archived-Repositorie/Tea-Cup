@@ -49,11 +49,10 @@ fun Path.writeJsonObject(data: JsonObject): JsonObject {
  * @throws Exception If the file is not found or if the data cannot be written to the file.
  */
 @Throws(Exception::class)
-fun Path.writeJsonObject(data: Any): JsonObject {
+fun <T> Path.writeJsonObject(data: T): JsonObject {
     val jsonObject = GSON.toJsonTree(data).asJsonObject
     return this.writeJsonObject(jsonObject)
 }
-
 /**
  * Gets a default JSON object from a file. If the file does not exist, writes the default object to the file.
  *
@@ -62,7 +61,7 @@ fun Path.writeJsonObject(data: Any): JsonObject {
  * @throws Exception If the file is not found or if the data cannot be written to the file.
  */
 @Throws(Exception::class)
-fun Path.getDefaultJsonObject(defaultObject: Any?): JsonObject {
+fun <T> Path.getDefaultJsonObject(defaultObject: T?): JsonObject {
     return if (defaultObject != null)
         this.writeJsonObject(defaultObject)
     else

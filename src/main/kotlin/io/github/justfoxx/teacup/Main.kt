@@ -12,7 +12,9 @@ fun preInit() {
 
 @Suppress("unused")
 fun init() {
-    mod.logger.info("Loaded!")
+    /*
+     * for tests
+     */
 }
 
 
