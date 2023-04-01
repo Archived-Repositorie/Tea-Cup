@@ -4,9 +4,9 @@ import net.minecraft.text.Style
 import net.minecraft.text.Text
 import net.minecraft.text.TextContent
 
-internal fun <V> onIterator(
-    entries: Iterable<(V) -> Unit>,
-    data: V
+internal fun <Value> onIterator(
+    entries: Iterable<(Value) -> Unit>,
+    data: Value
 ) {
     for (entry in entries) {
         entry.invoke(data)

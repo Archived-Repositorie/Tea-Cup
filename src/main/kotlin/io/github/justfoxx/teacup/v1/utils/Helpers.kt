@@ -4,7 +4,6 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
-import com.google.gson.JsonSyntaxException
 import com.google.gson.stream.JsonReader
 import java.io.File
 import java.io.FileNotFoundException
@@ -12,9 +11,27 @@ import java.io.FileReader
 import java.io.IOException
 import java.nio.file.Files
 import java.nio.file.Path
-import java.util.*
 
 val GSON: Gson = GsonBuilder().setPrettyPrinting().create()
+
+fun <T: Comparable<T>> List<T>.binarySortedPlace(target: T): Int {
+    var left = 0
+    var right = this.size - 1
+    while (left <= right) {
+        val mid = (left + right) / 2
+        when {
+            this[mid] == target -> return mid
+            this[mid] < target -> left = mid + 1
+            else -> right = mid - 1
+        }
+    }
+    return left
+}
+
+fun <T : Comparable<T>> MutableList<T>.addSorted(value: T) {
+    val index = this.binarySortedPlace(value)
+    this.add(index, value)
+}
 
 /**
  * Reads a JSON object from a file.
@@ -36,7 +53,7 @@ fun Path.readJsonObject(): JsonObject {
  * @throws Exception If the file is not found or if the data cannot be written to the file.
  */
 @Throws(Exception::class)
-fun Path.writeJsonObject(data: JsonObject): JsonObject {
+fun Path.writeByJsonObject(data: JsonObject): JsonObject {
     val file = this.toFile()
     return file.jsonWriter(data)
 }
@@ -49,10 +66,11 @@ fun Path.writeJsonObject(data: JsonObject): JsonObject {
  * @throws Exception If the file is not found or if the data cannot be written to the file.
  */
 @Throws(Exception::class)
-fun <T> Path.writeJsonObject(data: T): JsonObject {
+fun <Object> Path.writeObject(data: Object): JsonObject {
     val jsonObject = GSON.toJsonTree(data).asJsonObject
-    return this.writeJsonObject(jsonObject)
+    return this.writeByJsonObject(jsonObject)
 }
+
 /**
  * Gets a default JSON object from a file. If the file does not exist, writes the default object to the file.
  *
@@ -61,22 +79,11 @@ fun <T> Path.writeJsonObject(data: T): JsonObject {
  * @throws Exception If the file is not found or if the data cannot be written to the file.
  */
 @Throws(Exception::class)
-fun <T> Path.getDefaultJsonObject(defaultObject: T?): JsonObject {
+fun <Object> Path.getDefaultJsonObject(defaultObject: Object?): JsonObject {
     return if (defaultObject != null)
-        this.writeJsonObject(defaultObject)
+        this.writeObject(defaultObject)
     else
         JsonObject()
-}
-
-/**
- * Converts a JSON object to a object of the specified class.
- *
- * @param type The class of the object to convert to.
- * @return The Java object converted from the JSON object.
- */
-@Throws(JsonSyntaxException::class)
-fun <T> JsonObject.convertTo(type: Class<T>): T {
-    return GSON.fromJson(this, type)
 }
 
 @Throws(FileNotFoundException::class)
@@ -89,4 +96,13 @@ private fun File.jsonReader(): JsonObject {
 private fun File.jsonWriter(data: JsonObject): JsonObject {
     Files.writeString(this.toPath(), GSON.toJson(data))
     return this.jsonReader()
+}
+
+@Suppress("unused")
+fun String.formater(format: HashMap<String,Any>): String {
+    var result = this
+    for (pair in format) {
+        result = result.replace(pair.key, pair.value.toString())
+    }
+    return result
 }
