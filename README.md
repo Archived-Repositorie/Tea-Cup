@@ -1,5 +1,8 @@
 # Welcome to Tea-Cup
 
+## What is tea cup?
+This is library created to give mods utilities that they can use and also adds events system for serverside mods, so they can create mixin-free and mojank-free mods, potentially making it easier to port their mods on different versions without needing to touch weird mojank stuff. It will be updated on snapshots/latest possible versions.
+
 ## Usage in mods
 1. Adding modrinth repository to build.gradle
 ```groovy
