@@ -45,7 +45,7 @@ public class PreMain implements PreLaunchEntrypoint {
     }
     @Subscriber
     public static Unit onServerStarted(SingletonData<MinecraftServer> data) {
-        System.out.println("Server started!");
+         mod.getLogger.info("Server started!");
         return Unit.INSTANCE;
     }
 }
