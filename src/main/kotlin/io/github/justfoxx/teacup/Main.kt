@@ -6,14 +6,13 @@ internal val mod = Mod("teacup")
 
 @Suppress("unused")
 fun preInit() {
-
-
     mod.logger.info("Initializing")
 }
 
 @Suppress("unused")
 fun init() {
 }
+
 
 
 

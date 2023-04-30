@@ -20,7 +20,8 @@
       {
         "adapter": "kotlin",
         "value": "io.github.justfoxx.teacup.MainKt::preInit"
-      }
+      },
+      "io.github.justfoxx.teacup.v2.Test"
     ],
     "main": [
       {

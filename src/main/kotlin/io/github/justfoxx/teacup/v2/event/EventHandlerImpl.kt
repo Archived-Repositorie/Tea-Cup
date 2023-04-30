@@ -4,18 +4,20 @@ import io.github.justfoxx.teacup.v2.utils.sort.Priority
 import io.github.justfoxx.teacup.v2.utils.sort.SortedList
 import kotlin.reflect.KFunction1
 
-class EventHandlerImpl<Value : KFunction1<*,Unit>, Invoker>(private val invoker: (Iterable<Value>) -> Invoker)
+class EventHandlerImpl<Value, Invoker>(private val invoker: (Iterable<KFunction1<Value,Unit>>) -> Invoker)
     : EventHandler<Value, Invoker> {
-    private val values = SortedList<Value, Priority>()
+    private val values = SortedList<KFunction1<Value,Unit>, Priority>()
 
     override fun invoker(): Invoker = invoker(getAll())
 
-    override fun getAll(): Iterable<Value> = values.iterator()
+    override fun getAll(): Iterable<KFunction1<Value,Unit>> = values.iterator()
 
-    override fun register(value: Value) {
+    override fun register(value: KFunction1<Value,Unit>) {
         val event = value.annotations.find { it is Subscriber } as Subscriber?
             ?: Subscriber(Priority.NORMAL)
 
         values.add(value, event.priority)
     }
+
+
 }

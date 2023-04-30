@@ -19,7 +19,7 @@ internal fun <Value> onMutableIterator(
     data: MutableSingletonData<Value>
 ) {
     for (entry in entries) {
-        entry.call(data)
+        entry.call(data, Unit)
     }
 }
 
