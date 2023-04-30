@@ -24,11 +24,13 @@ Remember, register events on PreLaunch!
 ```kt
 val mod = Mod("ivycore") //helper class for mods
 
-fun preMain() {
-  Events.ON_ITEM_USING.onEvent { data ->
-    mod.logger.info("Item used: ${data.itemStack.item}")
-    data.itemUseResult.returnValue = ActionResult.PASS
-  }
+fun preInit() {
+    MinecraftServerEvents.ON_SERVER_STARTED.register(::onServerStarted)
+}
+
+@Subscriber
+fun onServerStarted(event: SingletonData<MinecraftServer>) {
+    mod.logger.info("Server started")
 }
 ```
 ### Java example
@@ -36,13 +38,15 @@ fun preMain() {
 public class PreMain implements PreLaunchEntrypoint {
     Mod mod = new Mod("teacup"); //helper class for mods
     
-    @Override
     public void onPreLaunch() {
-        Events.INSTANCE.getON_ITEM_USING().onEvent(data -> {
-            mod.getLogger().info("Item used: "+data.getItemStack().getItem());
-            data.getItemUseResult().setReturnValue(ActionResult.PASS);
-            return null;
-        });
+        MinecraftServerEvents.getON_SERVER_STARTED().registerHelper(
+                Test.class, "onServerStarted"
+        );
+    }
+    @Subscriber
+    public static Unit onServerStarted(SingletonData<MinecraftServer> data) {
+        System.out.println("Server started!");
+        return Unit.INSTANCE;
     }
 }
 ```
